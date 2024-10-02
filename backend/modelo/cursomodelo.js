@@ -1,6 +1,6 @@
 const db= require("../database/conexion.js");
 
-class CursosController{
+class cursomodelo{
     construct(){
     }
 
