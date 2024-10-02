@@ -1,4 +1,4 @@
-/*const express:e|{}=>core.Express = require("express");
+const express:e|{}=>core.Express = require("express");
 const router : Router =express.Router();
 const estudiantescontroller:{}= require("../controllers/estudiantescontrollers.js");
 
@@ -11,4 +11,3 @@ router.route(prefix: "/:id")
   .delete(estudiantescontroller.borrar);
 
 module.exports = router;
-*/
