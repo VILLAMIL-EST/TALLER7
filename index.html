@@ -8,13 +8,65 @@
 <body>
     <h1>Datos estudiante</h1>
     <!-- Formulario con caja de texto y botón de estudiante -->
-    <form id="estudiante">
-        <label for="inputText">Introduce una palabra:</label>
-        <input type="text" id="inputText" placeholder="Escribe aquí">
-        <button type="button" onclick="processText()">Enviar</button>
-    </form>
+    <form>
+        <label for="cedula" >Cedula/TI</label>
+        <input type="text" id="cedula" name="cedula" placeholder="109876534"/>
+        <br>
+        <label for="nombreestudiante" >Nombres/Apellidos</label>
+        <input type="text" id="nombreestudiante" name="nombreestudiante" placeholder="Pepito Perez"/> 
+        <br>
+        <button type="submit">ENVIAR</button>        
+    </form>    
 
+    <h2>Datos curso</h2>
+    <form action="">
+        <label for="CodigoCurso" >Codigo</label>
+        <input type="text" id="CodigoCurso" name="CodigoCurso" placeholder="K612021417"/> 
+        <br>
+        <label for="nombrecurso" >Nombres del curso</label>
+        <input type="text" id="nombrecurso" name="nombrecurso" placeholder="Arquitectura"/> 
+        <br>
+        <button type="submit">ENVIAR</button>
+    </form>
     
+    <h2>Datos secciones</h2>
+    <form action="">
+        <label for="nsecuencia" >numero de secuencia</label>
+        <input type="text" id="nsecuencia" name="nsecuencia" placeholder="2"/>
+        <br>
+        <label for="codigodelcurso" >Codigo Curso</label>
+        <input type="text" id="codigodelcurso" name="codigodelcurso" placeholder="K612021417"/> 
+        <br>
+        <label for="fecha" >Fecha</label>
+        <input type="text" id="fecha" name="fecha" placeholder="2"/>
+        <br>
+        <label for="inicio" >Hora inicio</label>
+        <input type="text" id="inicio" name="inicio" placeholder=""/>
+        <br>
+        <label for="fin" >hora fin</label>
+        <input type="text" id="fin" name="fin" placeholder=""/>
+        <br>
+        <button type="submit">ENVIAR</button>
+    </form>
+    <h2>Datos Asistencia</h2>
+    <form action=""></form>
+        <label for="nsecuencia" >numero de secuencia</label>
+        <input type="text" id="nsecuencia" name="nsecuencia" placeholder="2"/>
+        <br>
+        <label for="nsecciones" >numero de secciones</label>
+        <input type="text" id="nsecciones" name="nsecciones" placeholder="2"/>
+        <br>
+        <label for="cedula" >Cedula/TI</label>
+        <input type="text" id="cedula" name="cedula" placeholder="109876534"/>
+        <br>
+        <label for="multaAsistencia" >Multa Asistencia</label>
+        <input type="text" id="multaAsistencia" name="multaAsistencia" placeholder="1/0"/>
+        <br>
+        <label for="multanormas" >Multa normas</label>
+        <input type="text" id="multanormas" name="multanormas" placeholder="3/0/"">
+        <br>
+        <button type="submit">ENVIAR</button>
+    </form>
     
 </body>
 </html>       
