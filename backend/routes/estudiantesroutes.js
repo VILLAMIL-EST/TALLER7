@@ -1,13 +1,13 @@
-const express:e|{}=>core.Express = require("express");
-const router : Router =express.Router();
-const estudiantescontroller:{}= require("../controllers/estudiantescontrollers.js");
+const express= require("express");
+const router =express.Router();
+const estudiantesmodelo= require("../modelo/estudiantesmodelo.js");
 
-router.get(path:"/",estudiantescontroller.consultar);
-router.get(path "/",estudiantescontroller.ingresar);
+router.get("/",estudiantesmodelo.consultar);
+router.get("/",estudiantesmodelo.ingresar);
 
-router.route(prefix: "/:id")
-.get(estudiantescontroller.consultarDetalle)
-  .put(estudiantescontroller.actualizar)
-  .delete(estudiantescontroller.borrar);
+router.route("/:id")
+.get(estudiantesmodelo.consultarDetalle)
+  .put(estudiantesmodelo.actualizar)
+  .delete(estudiantesmodelo.borrar);
 
 module.exports = router;

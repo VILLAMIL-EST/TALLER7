@@ -1,8 +1,8 @@
 {
   "name": "taller7",
   "version": "1.0.0",
-  "description": "��#\u0000T\u0000A\u0000L\u0000L\u0000E\u0000R\u00007\u0000\r\u0000 \u0000",
-  "main": "index.js",
+  "description": "",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

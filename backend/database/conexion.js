@@ -7,7 +7,7 @@ const conexion = mysql.createConnection({
     database: 'cursos'
 });
 
-// Establecer la conexión
+
 conexion.connect((err) => {
     if (err) {
         console.error('Error conectando a la base de datos: ', err);
