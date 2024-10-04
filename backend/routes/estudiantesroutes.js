@@ -7,7 +7,7 @@ router.get("/",estudiantesmodelo.ingresar);
 
 router.route("/:id")
 .get(estudiantesmodelo.consultarDetalle)
-  .put(estudiantesmodelo.actualizar)
-  .delete(estudiantesmodelo.borrar);
+.put(estudiantesmodelo.actualizar)
+.delete(estudiantesmodelo.borrar);
 
 module.exports = router;
