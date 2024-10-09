@@ -1,109 +1,82 @@
-const db= require("../database/conexion.js");
+const connection = require('../database/conexion');
 
-class cursomodelo{
-    construct(){
-    }
-
-    consultar(req,res){
-        try{
-            db.query('SELECT  * FROM cursos',
-            [],(err,rows) => {
-                if(err) {
-                    res.status (400).send(err.message);
+const aggCurso = {
+    agregarCurso: (codigo, nombre) => {
+        return new Promise((resolve, reject) => {
+            const query = 'INSERT INTO cursos (codigodelcurso, nombredelcurso) VALUES (?, ?)';
+            connection.query(query, [codigo, nombre], (error, results) => {
+                if (error) {
+                    return reject(error);
                 }
-                res.status(200).json(rows);
+                resolve(results.insertId); // Retorna el ID del curso agregado
             });
-        }catch (err){
-            res.status(500).send(err.message);
-        }
-    }
+        });
+    },    
+};
 
-    actualizar(req,res){
-        const {id} = req.params;
-        try{
-            const {nombre,descripcion,profesor_id} = req.body;
-            db.query('UPDATE cursos SET nombre=?, descripcion=?, profesor_id=? WHERE id=?;',
-            [nombre,descripcion, profesor_id, id],(err,rows) => {
-                if(err) {
-                    res.status (400).send(err.message);
+const actCurso = {
+    actualizarCurso: (codigo, nuevoNombre) => {
+        return new Promise((resolve, reject) => {
+            const query = 'UPDATE cursos SET nombredelcurso = ? WHERE codigodelcurso = ?';
+            connection.query(query, [nuevoNombre, codigo], (error, results) => {
+                if (error) {
+                    return reject(error);
                 }
-                if (rows.affectedRows == 1)
-                    res.status(200).json({respuesta:"Registro actualizado correctamente"});
-            });
-        }catch (err){
-            res.status(500).send(err.message);
-        }
-    }
-
-    ingresar(req,res){
-        try{
-            const {nombre,descripcion,profesor_id} = req.body;
-            db.query('INSERT INTO cursos (id, nombre, descripcion,profesor_id) VALUES (NULL, ?, ?, ?);',
-            [nombre,descripcion,profesor_id],(err,rows) => {
-                if(err) {
-                    res.status (400).send(err.message);
-                }else{
-                    res.status(201).json({id: rows.insertId});
+                if (results.affectedRows === 0) {
+                    return reject(new Error('No se encontró el curso con el código especificado'));
                 }
+                resolve('Curso actualizado correctamente');
             });
-        }catch (err){
-            res.status(500).send(err.message);
-        }
+        });
     }
+};
 
-
-    asociarEstudiante(req,res){
-        try{
-            const {curso_id,estudiante_id} = req.body;
-            db.query('INSERT INTO cursos_estudiantes (curso_id, estudiante_id) VALUES (?, ?);',
-            [curso_id,estudiante_id],(err,rows) => {
-                if(err) {
-                    res.status (400).send(err.message);
-                }else{
-                    res.status(201).json({respuesta: "Estudiante inscrito en el curso"});
+const eliCurso = {
+    eliminarCurso: (codigo) => {
+        return new Promise((resolve, reject) => {
+            const query = 'DELETE FROM cursos WHERE codigodelcurso = ?';
+            connection.query(query, [codigo], (error, results) => {
+                if (error) {
+                    return reject(error);
                 }
-            });
-        }catch (err){
-            res.status(500).send(err.message);
-        }
-    }
-
-
-
-    consultarDetalle(req,res){
-        const {id} = req.params;
-        try{
-            //const {dni,nombre,apellido,email,profesor,telefono} = req.body;
-            db.query('SELECT  * FROM cursos WHERE id=?',[id],(err,rows) => {
-                if(err) {
-                    res.status (400).send(err.message);
+                if (results.affectedRows === 0) {
+                    return reject(new Error('No se encontró el curso con el código especificado'));
                 }
-                res.status(200).json(rows[0]);
+                resolve('Curso eliminado correctamente');
             });
-        }catch (err){
-            res.status(500).send(err.message);
-        }
+        });
     }
+};
 
-    borrar(req,res){
-        //res.json ({msg:"Borrar estudiantes desde clase"});
-        const {id} = req.params;
-        try{
-            db.query('DELETE FROM cursos WHERE id=?;',
-            [id],(err,rows) => {
-                if(err) {
-                    res.status (400).send(err.message);
+const listCurso = {
+    listarCursos: () => {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM cursos';
+            connection.query(query, (error, results) => {
+                if (error) {
+                    return reject(error);
                 }
-                if (rows.affectedRows == 1)
-                    res.status(200).json({respuesta:"Registro borrado correctamente"});
+                resolve(results);
             });
-        }catch (err){
-            //console.log(err);
-            res.status(500).send(err.message);
-        }
-
+        });
     }
+};
 
-}
+const busCurso = {
+    buscarCurso: (codigo) => {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM cursos WHERE codigodelcurso = ?';
+            connection.query(query, [codigo], (error, results) => {
+                if (error) {
+                    return reject(error);
+                }
+                if (results.length === 0) {
+                    return reject(new Error('No se encontró el curso con el código especificado'));
+                }
+                resolve(results[0]); // Retorna el primer (y único) curso encontrado
+            });
+        });
+    }
+};
 
-module.exports = new CursosController();
+module.exports = { aggCurso, actCurso, eliCurso, listCurso, busCurso };
