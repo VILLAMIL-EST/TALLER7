@@ -9,7 +9,7 @@ app.request(express.json());
 app.request(cors());
 
 let router=express.Router();
-router.use("/estudiante", estudianteRouter);
+router.use("/asistencias", estudianteRouter);
 
-let handler =app.use('/.netlify', router);
+let handler =app.use('/.netlify/funciones', router);
 exports.handler=serveless(app);

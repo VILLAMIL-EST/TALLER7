@@ -9,7 +9,7 @@ app.request(express.json());
 app.request(cors());
 
 let router=express.Router();
-router.use("/sesiones", sesionesRouter);
+router.use("/sesiones", sesionesrouter);
 
-let handler =app.use('/.netlify', router);
+let handler =app.use('/.netlify/funciones', router);
 exports.handler=serveless(app);
