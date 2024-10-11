@@ -1,34 +1,12 @@
-const connection = require('../database/conexion');
+const connection = require('../database/conexion.js');
 
-const aggEstudiante = {
-    agregarEstudiante: (documento, nombres) => {
-        return new Promise((resolve, reject) => {
-            const query = 'INSERT INTO estudiante (documentodeidentidaddelestudiante, nombrescompletosdelestudiante) VALUES (?, ?)';
-            connection.query(query, [documento, nombres], (error, results) => {
-                if (error) {
-                    return reject(error);
-                }
-                resolve(results.insertId); // Retorna el ID del estudiante agregado
-            });
-        });
-    },    
-};
-const actEstudiante = {
-    actualizarEstudiante: (documento, nuevosNombres) => {
-        return new Promise((resolve, reject) => {
-            const query = 'UPDATE estudiante SET nombrescompletosdelestudiante = ? WHERE documentodeidentidaddelestudiante = ?';
-            connection.query(query, [nuevosNombres, documento], (error, results) => {
-                if (error) {
-                    return reject(error);
-                }
-                if (results.affectedRows === 0) {
-                    return reject(new Error('No se encontró el estudiante con el documento especificado'));
-                }
-                resolve('Estudiante actualizado correctamente');
-            });
-        });
-    }
-};
+class estudiantesmodelo {
+    constructor(){}
+}
+    
+consultar(red,res){
+    
+}
 const eliEstudiante = {
     eliminarEstudiante: (documento) => {
         return new Promise((resolve, reject) => {
